@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" style="font-size: 125%;">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>刮刮卡</title>
+
+<link href="style.css" rel="stylesheet" type="text/css">
+
+</head>
+<body class="scratchCard">
+	<div class="scratchHeader">
+		<div class="scratchHeader_btn">
+			<button>登录</button>
+			<button>注册</button>
+		</div>
+	</div>
+	<div class="scratchRegion">
+		<h1>您还有<span></span>次机会<label data-use="2">再来一次</label></h1>
+		<div class="scratchPicture">
+			<img id="earImg" data-use="1" src="images/scratchGray.jpg"  />
+			<div class="scratchContent">
+				10元话费~
+			</div>
+		</div>
+		<div class="scratchAward">
+			<h3>看大家都刮到什么</h3>
+			<ul>
+				<li class="on">159****刚刚刮到<span>30元话费</span></li>
+				<li>123****刚刚刮到<span>40元话费</span></li>
+				<li>145****刚刚刮到<span>50元话费</span></li>
+				<li>167****刚刚刮到<span>60元话费</span></li>
+			</ul>
+		</div>
+	</div>
+	<div class="scratchRule">
+		<h3>活动日期</h3>
+		<p>自2016年09月15日起，至2016年09月30日止。 </p>
+		<h3>活动规则</h3>
+		<p>1、刮刮卡刮奖区内容按照刮刮卡，礼品比例及实物名称印制;</p>
+		<p>2、这部分礼品用于刮刮卡刮开即奖;</p>
+		<p>3、活动中奖结果均以系统自动下发的中奖通知为准;</p>
+		<p>4、中奖以后，在新页面中填写收货地址及联系方式即可，我们工作人员会尽快与您联系。</p>
+	</div>
+</body>
+<script src="js/jquery-1.11.1.min.js"></script>
+
+<script>
+	var idx=$('#earImg').attr('data-use');
+	$('#earImg').on('click',function(){
+		$('#earImg').attr('data-use',0);
+	});
+	var index=$('.scratchRegion label').attr('data-use');
+	$('.scratchRegion h1 span').html(index);
+	$('.scratchRegion label').on('click',function(){
+		if(index<1)return;
+		$('#earImg').eraser('reset');
+		index=index-1;
+		$('.scratchRegion h1 span').html(index);
+		$('.scratchRegion label').attr('data-use',index);
+		if(index<1)
+		{
+			$('.scratchRegion h1').html('分享后可获得一次机会');
+		}
+	});
+	function resize(){
+		$('.scratchContent').height($('.scratchPicture img').height());
+		$('.scratchHeader').height($('.scratchHeader').width()*0.473);
+		$('.scratchHeader').find('button').css('margin-top',$('.scratchHeader').height()*0.82);
+		$('.scratchContent').css('line-height',$('.scratchPicture img').height()+'px');
+		$('canvas').width($('.scratchContent').width());
+		$('.scratchPicture').height($('.scratchPicture img').height());
+	}
+	resize();
+	$(window).resize(function(){
+		resize();
+	});
+	
+	var lenS=$('.scratchAward').find('li').length;
+	var indexS=0;
+	setInterval(scratchSU,4000);
+	function scratchSU(){
+		$('.scratchAward').find('li').removeClass('scraAnimation').removeClass('on').addClass('scraAnimation1');
+		$('.scratchAward').find('li').eq(indexS).removeClass('scraAnimation1').addClass('scraAnimation').addClass('on');
+		console.log(indexS);
+		indexS=indexS+1;
+		if(indexS==lenS){
+			indexS=0;
+		}
+	}
+</script>
+<script src="js/ear.js"></script>
+<script>
+$('#earImg').eraser();
+$('#earImg').eraser( {
+    completeRatio: .5,
+    completeFunction: showResetButton
+});
+$('#earImg').eraser( "size", 30 )
+</script>
+</html>

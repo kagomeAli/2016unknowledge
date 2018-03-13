@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" style="font-size: 125%;">
+<html xmlns="http://www.w3.org/1999/xhtml" style="font-size: 125%;">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<link rel="stylesheet" href="style.css" />
+<title>无标题文档</title>
+</head>
+
+<body class="bgBody">
+	<h1>宽带端到端感知线上问卷</h1>
+	<img class="img" src="images/235009-140R00QF463.jpg" />
+	<form class="form">
+		<div class="title">您使用的是哪一种类型的电信宽带？</div>
+		<ul>
+			<li><div class="ball"></div>FTTH 光纤</li>
+			<li><div class="ball"></div>FTTB+LAN 网线</li>
+			<li><div class="ball"></div>ADSL 电话线</li>
+			<li><div class="ball"></div>未使用电信宽带</li>
+		</ul>
+		<div class="title">您的签约带宽下载速率是多少？注：单位bps </div>
+		<ul>
+			<li><div class="ball"></div>2M及以下</li>
+			<li><div class="ball"></div>4M</li>
+			<li><div class="ball"></div>8M</li>
+			<li><div class="ball"></div>10M</li>
+			<li><div class="ball"></div>20M</li>
+		</ul>
+		<div class="title">您对家里的宽带进行过测速吗？例如天天上网助手、360等测速软件</div>
+		<ul>
+			<li><div class="ball"></div>有</li>
+			<li><div class="ball"></div>没有</li>
+		</ul>
+		<div class="btnDiv">
+			<button id="btn" type="button">提交</button>
+		</div>
+		
+	</form>
+	<div class="gray">
+		<div class="popBox">
+			<p>确认提交吗？</p>
+			<button type="button" id="btn2">确定</button>
+			<button id="btn3">取消</button>
+		</div>
+		<div class="popBox2">
+			<p>提交成功！</p>
+		</div>
+	</div>
+</body>
+<script src="js/jquery-1.11.1.min.js"></script>
+<script>
+	$('.form').find('li').on('click',function(){
+		if($(this).hasClass('textColor')){
+			$(this).toggleClass('textColor');
+		}
+		else{
+			$(this).parent().children().removeClass('textColor');
+			$(this).addClass('textColor');
+		}
+	});
+	$('.gray').height($(window).height());
+	$('.gray').hide();
+	console.log($('.gray').height());
+	$('.popBox').hide();
+	$('.popBox2').hide();
+	$('#btn').on('click',function(){
+		$('.gray').show();
+		$('.popBox').show().addClass('showAlert');	
+		$('.bgBody').css('overflow','hidden');
+	})
+	$('#btn3').on('click',function(){
+		$('.popBox').hide().removeClass('showAlert');
+		$('.gray').hide();
+		$('.bgBody').css('overflow','scroll');
+	})
+	$('#btn2').on('click',function(){
+		$('.popBox').hide().removeClass('showAlert');
+		$('.popBox2').show(500);
+		$('.gray').hide();
+		$('.bgBody').css('overflow','scroll');
+		$('.form').find('li').each(function(){
+			$(this).removeClass('textColor');
+		});
+		var time=setInterval(function(){
+			$('.popBox2').hide(500);
+			
+		},3000);
+	})
+</script>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" style="font-size: 125%;">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>大转盘抽奖代码</title>
+
+<link href="style.css" rel="stylesheet" type="text/css">
+
+</head>
+<body class="rio">
+	<div class="rioHeader">
+		<img src="images/header.jpg"/>
+	</div>
+	<ul>
+		<li>
+			<div class="rioPicture">
+				<img src="images/1n.png"  />
+				<small>击剑</small>
+			</div>
+			<div class="rioPicture">
+				<img src="images/2n.png"  />
+				<small>羽毛球</small>
+			</div>
+			<div class="rioPicture">
+				<img src="images/3n.png"  />
+				<small>篮球</small>
+			</div>
+		</li>
+		<li>
+			<div class="rioPicture">
+				<img src="images/4n.png"  />
+				<small>跳水</small>
+			</div>
+			<div class="rioPicture">
+				<img src="images/5n.png"  />
+				<small>自行车</small>
+			</div>
+			<div class="rioPicture">
+				<img src="images/6n.png"  />
+				<small>游泳</small>
+			</div>
+		</li>
+		<li>
+			<div class="rioPicture">
+				<img src="images/7n.png"  />
+				<small>足球</small>
+			</div>
+			<div class="rioPicture">
+				<img src="images/8n.png"  />
+				<small>高尔夫</small>
+			</div>
+			<div class="rioPicture">
+				<img src="images/9n.png"  />
+				<small>举重</small>
+			</div>
+		</li>
+	</ul>
+	<div class="gray">
+		
+	</div>
+	<div class="rioPop">
+		<img src="images/pop.png" />
+		<h1>10<small>G</small><span>闲时流量包</span></h1>
+		<button>立即领取</button>
+	</div>
+	<div class="rioFooter">
+		<img src="images/footer.png" />
+		<div class="rioFooter_rule">
+			<p>1、电信用户点击奥运会项目图标并点亮所有奥运会项目就能免费领取本地10G闲时流量包（22:00~次日7:00），每个电信用户可以领取10次闲时流量包，每天只能领取1次</p>	
+			<p>2、2016年08月01日起至2016年08月31日订购当日立即生效，次月自动失效，不能退订，不能变更，过期作废，不自动续包。可重复订购，流量不合并，老流量包有效期不变，新流量包有效期按订购时间算</p>
+		</div>
+	</div>
+</body>
+<script src="js/jquery-1.11.1.min.js"></script>
+<script>
+var index=1;
+$('.gray').height($(window).height());
+$('.gray').hide();
+$('.rioPop').hide();
+$('.rioPop').find("h1").css('top',$('.rioPop').height()/2);
+$('.rioPop').find("h1").css('left',$('.rioPop').width()/3);
+$('.rioPop').find("button").css('top',$('.rioPop').height()/1.14);
+$(window).resize(function(){
+	$('.rioPop').find("h1").css('top',$('.rioPop').height()/2);
+	$('.rioPop').find("h1").css('left',$('.rioPop').width()/3);
+	$('.rioPop').find("button").css('top',$('.rioPop').height()/1.14);
+});
+$('.rioPicture').on('click',function(){
+	$('.gray').show();
+	if(index!=1){
+		$('.rioPop').find('h1').html('已经成功领取过');
+		$('.rioPop').find('button').html('确定');
+	}
+	else{
+		var pic=$(this).find('img').attr('src');
+		pic=pic.replace(/n./,'2.');
+		$(this).find('small').addClass('small');
+		$(this).find('img').attr('src',pic);
+		index=0;
+	}
+	$('.rioPop').show().removeClass('popAnimation2').addClass('popAnimation');
+	$('.rio').css('overflow','hidden');
+})
+$('.rioPop').find('button').on('click',function(){
+	if($('.rioPop').find('button').html()=='确定')
+	{
+		$('.gray').hide();
+		$('.rioPop').hide();
+	}
+	else{
+		$('.rioPop').find('h1').css('font-size','1rem');
+		$('.rioPop').find('h1').html('成功领取');
+		$('.rioPop').find('button').html('确定');
+	}
+	$('.rio').css('overflow','scroll');
+})
+</script>
+</html>
