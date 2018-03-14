@@ -1,0 +1,4 @@
+vertical-align：“inline-block依赖型元素”，ＩＥ浏览器依赖有毒,
+    vertical-align和line-height合在一起用偶尔用到文字基线问题，可以和font-size一起用咯!
+
+

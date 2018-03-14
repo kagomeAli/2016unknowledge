@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>构造器属性</title>
+</head>
+<body>
+<script src="../keeko/gojs/jquery-2.0.3.min.js"></script>
+<script>
+    function Obj(name){
+        this.name=name;
+        this.hello=function(){
+            document.write(this.name);
+        }
+    }
+    var text=new Obj("李晓华");
+    text.hello();
+    alert(text.constructor);
+
+
+    $(function () {
+        var test1 = function (args) {
+            args.name = "lcc2";
+            args = { name: "lcc3" };
+        };
+        var test2 = function (args) {
+            args = { name: "lcc2" };
+            args.name = "lcc3";
+        };
+
+
+        var params1 = { "params": "600" };
+        var params2 = { "params": "600" };
+
+        params1 = { name: "lcc1" };
+        test1.call(this, params1);
+        console.log(JSON.stringify(params1));
+
+        params2 = { name: "lcc1" };
+        test2(params2);
+        console.log(JSON.stringify(params2));
+    });
+</script>
+<script type="text/javascript">
+    function fun2(){
+        console.log("this is the second method show");
+
+    }
+    function fun1(){
+        var obj = new fun2();
+        console.log(obj);
+        console.log('if display there no erro through the call');
+    }
+    window.onload =  fun1;
+</script>
+</body>
+</html>
+
+
